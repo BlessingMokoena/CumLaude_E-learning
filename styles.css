@@ -1,0 +1,245 @@
+/* Base Reset & Typography */
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 50, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Main Container matching the VUT Blackboard layout */
+.login-container {
+    display: flex;
+    width: 80%;
+    max-width: 950px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+/* Left Side: Login Form */
+.login-left {
+    flex: 1.2;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-left img.logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.login-left h1 {
+    font-size: 22px;
+    color: #1b3768;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.login-form {
+    text-align: left;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.login-form label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background: #fdfdfd;
+}
+
+.login-form input:focus {
+    border-color: #1b3768;
+    outline: none;
+    box-shadow: 0 0 5px rgba(27, 55, 104, 0.3);
+}
+
+.login-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #1b3768;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #12264a;
+}
+
+/* Third-Party Dropdown Styles */
+.provider-dropdown-container {
+    margin-top: 15px;
+    position: relative;
+}
+
+.dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.dropdown-btn:hover {
+    background-color: #e2e8f0;
+}
+
+.provider-list {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    border: 1px solid #cbd5e1;
+    border-radius: 5px;
+    background: white;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.provider-list.hidden {
+    display: none;
+}
+
+.provider-list li a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 13px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.provider-list li a:hover {
+    background-color: #f8fafc;
+    color: #1b3768;
+}
+
+/* Quick Links */
+.login-links {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.login-links a {
+    display: inline-block;
+    color: #1b3768;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 5px 10px;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+.ticket-button {
+    display: block;
+    width: 100%;
+    max-width: 350px;
+    margin: 15px auto 0;
+    padding: 10px;
+    background-color: #d4af37;
+    color: #fff !important;
+    border-radius: 5px;
+    text-decoration: none !important;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.ticket-button:hover {
+    background-color: #b5952f;
+}
+
+/* Right Side: Announcements */
+.login-right {
+    flex: 1;
+    padding: 40px;
+    background: rgba(15, 23, 42, 0.95);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-right h2 {
+    font-size: 22px;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 2px solid #d4af37;
+    padding-bottom: 10px;
+    display: inline-block;
+    align-self: center;
+}
+
+.announcement {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 15px;
+}
+
+.announcement:last-child {
+    border-bottom: none;
+}
+
+.announcement h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #d4af37;
+    font-size: 17px;
+}
+
+.announcement p {
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Design for Mobile */
+@media(max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+        width: 90%;
+        height: 90vh;
+        overflow-y: auto;
+    }
+    .login-left,
+    .login-right {
+        padding: 30px 20px;
+    }
+}
