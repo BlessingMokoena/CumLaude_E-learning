@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener('click', () => {
-        providerList?.classList.add('hidden'));
+        providerList?.classList.add('hidden');
     });
 
     // 3. Secret Admin Access (5 Clicks)
