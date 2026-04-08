@@ -5,7 +5,7 @@
 }
 
 body {
-    background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 50, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 50, 0.6), rgba(0, 0, 50, 0.6)), url('icon.png') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     margin: 0;
@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-/* Main Container matching the VUT Blackboard layout */
+
 .login-container {
     display: flex;
     width: 80%;
