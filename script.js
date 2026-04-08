@@ -22,14 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const providerBtn = document.getElementById('redirectProvidersDropdownButton');
     const providerList = document.getElementById('loginRedirectProviderList');
 
-    if (providerBtn) {
+    if (providerBtn && providerList) {
         providerBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             providerList.classList.toggle('hidden');
         });
     }
 
-    document.addEventListener('click', () => providerList?.classList.add('hidden'));
+    document.addEventListener('click', () => {
+        providerList?.classList.add('hidden'));
+    });
 
     // 3. Secret Admin Access (5 Clicks)
     let logoClicks = 0;
@@ -138,9 +140,6 @@ document.getElementById('sendResetBtn')?.addEventListener('click', async () => {
         alert(error.message);
     }
 });
-
-// Add this to the bottom of your script.js
-import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
 const resetForm = document.getElementById('resetPasswordForm');
 const statusMsg = document.getElementById('statusMessage');
