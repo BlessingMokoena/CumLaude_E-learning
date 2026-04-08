@@ -1,3 +1,79 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+// 1. Unified Firebase Config
+const firebaseConfig = {
+    apiKey: "AIzaSyBjZIbMUozbDtPJMKhzaJZT_-P4KEP9uKE",
+    authDomain: "cumlaude-blackboard.firebaseapp.com",
+    projectId: "cumlaude-blackboard",
+    storageBucket: "cumlaude-blackboard.firebasestorage.app",
+    messagingSenderId: "495067551795",
+    appId: "1:495067551795:web:011ea05b87f50bbb4aeb46",
+    measurementId: "G-GZS97CVHHV"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// 2. Dropdown Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const providerBtn = document.getElementById('redirectProvidersDropdownButton');
+    const providerList = document.getElementById('loginRedirectProviderList');
+
+    if (providerBtn) {
+        providerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            providerList.classList.toggle('hidden');
+        });
+    }
+
+    document.addEventListener('click', () => providerList?.classList.add('hidden'));
+
+    // 3. Secret Admin Access (5 Clicks)
+    let logoClicks = 0;
+    const logoImg = document.querySelector('.logo');
+    logoImg?.addEventListener('click', () => {
+        logoClicks++;
+        if (logoClicks === 5) {
+            const secret = prompt("Enter Admin Access Key:");
+            if (secret === "CL-2026") window.location.href = "admin-login.html";
+        }
+        setTimeout(() => { logoClicks = 0; }, 3000);
+    });
+});
+
+// 4. Unified Login Handler (Handles Student, Staff, and Guest forms)
+const handleLogin = async (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    const password = e.target.querySelector('input[type="password"]').value;
+
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Fetch Role from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        
+        if (userDoc.exists()) {
+            const role = userDoc.data().role;
+            if (role === 'admin') window.location.href = "admin-dashboard.html";
+            else if (role === 'staff') window.location.href = "staff-dashboard.html";
+            else window.location.href = "student-dashboard.html";
+        } else {
+            alert("No user role assigned. Contact Admin.");
+        }
+    } catch (error) {
+        alert("Login Error: " + error.message);
+    }
+};
+
+// Attach listener to whichever form is present on the current page
+document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+document.getElementById('staffLoginForm')?.addEventListener('submit', handleLogin);
+document.getElementById('guestLoginForm')?.addEventListener('submit', handleLogin);
 document.addEventListener("DOMContentLoaded", function() {
     
     // Elements for the dropdown toggle
@@ -46,6 +122,50 @@ logoImg.addEventListener('click', () => {
     setTimeout(() => { logoClicks = 0; }, 3000);
 });
 
+// Password Reset Logic
+document.querySelector('a[href="#"]')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('forgotPasswordModal').classList.remove('hidden');
+});
+
+document.getElementById('sendResetBtn')?.addEventListener('click', async () => {
+    const email = document.getElementById('resetEmail').value;
+    try {
+        await sendPasswordResetEmail(auth, email);
+        alert("Reset email sent! Check your inbox.");
+        document.getElementById('forgotPasswordModal').classList.add('hidden');
+    } catch (error) {
+        alert(error.message);
+    }
+});
+
+// Add this to the bottom of your script.js
+import { sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+const resetForm = document.getElementById('resetPasswordForm');
+const statusMsg = document.getElementById('statusMessage');
+
+if (resetForm) {
+    resetForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('resetEmail').value;
+
+        try {
+            // Using 'auth' which was initialized earlier in your script
+            await sendPasswordResetEmail(auth, email);
+            
+            statusMsg.style.display = "block";
+            statusMsg.style.color = "#166534"; // Success Green
+            statusMsg.innerHTML = "<b>Success!</b> A reset link has been sent to your email.";
+            resetForm.reset();
+        } catch (error) {
+            statusMsg.style.display = "block";
+            statusMsg.style.color = "#991b1b"; // Error Red
+            statusMsg.innerHTML = "<b>Error:</b> " + error.message;
+        }
+    });
+}
+
     // Optional: Basic Form Validation before submission
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -79,55 +199,5 @@ logoImg.addEventListener('click', () => {
         });
     }
 
-    // Import Firebase modules
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
-
-// Your Firebase Config (Paste your actual config here)
-const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "cumlaude-portal.firebaseapp.com",
-  projectId: "cumlaude-portal",
-  // ... rest of your config
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-const loginForm = document.getElementById('loginForm');
-
-loginForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        // 1. Authenticate user
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        const user = userCredential.user;
-
-        // 2. Fetch User Role from Firestore
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        
-        if (userDoc.exists()) {
-            const userData = userDoc.data();
-            
-            // 3. Redirect based on role
-            if (userData.role === 'admin') {
-                window.location.href = "admin-dashboard.html";
-            } else if (userData.role === 'staff') {
-                window.location.href = "staff-login.html"; // Or a specific dashboard
-            } else {
-                window.location.href = "student-portal.html";
-            }
-        } else {
-            alert("User profile not found in database.");
-        }
-    } catch (error) {
-        alert("Error: " + error.message);
-    }
-});
-
+    
 });
