@@ -31,6 +31,21 @@ providerList.addEventListener('click', () => {
         }
     });
 
+    let logoClicks = 0;
+const logoImg = document.querySelector('.logo');
+
+logoImg.addEventListener('click', () => {
+    logoClicks++;
+    if (logoClicks === 5) { // Secret: Click 5 times
+        const secretCode = prompt("Enter Admin Access Key:");
+        if (secretCode === "CL-2026") { // A second layer of security
+            window.location.href = "admin-login.html";
+        }
+    }
+    // Reset counter if they don't click fast enough
+    setTimeout(() => { logoClicks = 0; }, 3000);
+});
+
     // Optional: Basic Form Validation before submission
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
@@ -63,4 +78,56 @@ providerList.addEventListener('click', () => {
             }
         });
     }
+
+    // Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+
+// Your Firebase Config (Paste your actual config here)
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "cumlaude-portal.firebaseapp.com",
+  projectId: "cumlaude-portal",
+  // ... rest of your config
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const loginForm = document.getElementById('loginForm');
+
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        // 1. Authenticate user
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // 2. Fetch User Role from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            
+            // 3. Redirect based on role
+            if (userData.role === 'admin') {
+                window.location.href = "admin-dashboard.html";
+            } else if (userData.role === 'staff') {
+                window.location.href = "staff-login.html"; // Or a specific dashboard
+            } else {
+                window.location.href = "student-portal.html";
+            }
+        } else {
+            alert("User profile not found in database.");
+        }
+    } catch (error) {
+        alert("Error: " + error.message);
+    }
+});
+
 });
