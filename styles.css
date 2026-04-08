@@ -206,6 +206,19 @@ body {
     align-self: center;
 }
 
+.announcement a {
+    color: #d4af37;           /* Gold color matching your headers */
+    text-decoration: none;    /* Removes default underline */
+    font-weight: bold;        /* Makes it stand out */
+    border-bottom: 1px solid transparent; /* Preparation for hover effect */
+    transition: 0.3s ease;
+}
+
+.announcement a:hover {
+    color: #f1d279;           /* Lighter gold on hover */
+    border-bottom: 1px solid #f1d279; /* Adds a clean gold underline on hover */
+}
+
 .announcement {
     margin-bottom: 25px;
     border-bottom: 1px solid #334155;
@@ -242,4 +255,7 @@ body {
     .login-right {
         padding: 30px 20px;
     }
+
+    /* Styling the website link in the announcement */
+
 }

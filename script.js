@@ -34,6 +34,25 @@ document.addEventListener("DOMContentLoaded", function() {
             const username = document.getElementById('username').value.trim();
             const password = document.getElementById('password').value.trim();
 
+            // 1. Email Validation (Regex)
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        // 2. Password Security Requirements:
+        // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+        if (!emailPattern.test(email)) {
+            event.preventDefault();
+            alert("Please enter a valid email address (e.g., student@gmail.com).");
+            return;
+        }
+
+        if (!passwordPattern.test(password)) {
+            event.preventDefault();
+            alert("Password is not secure enough!\n\nIt must be at least 8 characters long and include:\n- One uppercase letter\n- One lowercase letter\n- One number");
+            return;
+        }
+
             if (!username || !password) {
                 event.preventDefault();
                 alert("Please enter both your Student ID and password.");
