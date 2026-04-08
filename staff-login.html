@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CumLaude Institute | Staff Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-left">
+        <img src="icon.png" alt="CumLaude Institute Logo" class="logo" onerror="this.src='https://via.placeholder.com/180x60?text=CumLaude+Institute'">
+        
+        <h1>Welcome to the Staff Portal</h1>
+        
+        <div class="login-form">
+            <form id="staffLoginForm" action="#" method="POST">
+                <label for="username">Staff Email</label>
+                <input type="email" id="username" name="username" placeholder="e.g. j.doe@cumlaudeinstitute.co.za" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                
+                <button type="submit">Staff Sign In</button>
+            </form>
+            
+            <div id="loginRedirectProviders" class="provider-dropdown-container">
+                <button id="redirectProvidersDropdownButton" type="button" class="dropdown-btn">Back to Student Login ▼</button>
+                <ul id="loginRedirectProviderList" class="provider-list hidden">
+                    <li><a href="index.html">Login as Student</a></li>
+                    <li><a href="guest-login.html">Login as Guest / Moderator</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="login-links">
+            <a href="#">Forgot Password?</a>
+            <a href="https://www.cumlaudeinstitute.co.za/contact.html">Staff Support</a>
+        </div>
+    </div>
+
+    <div class="login-right">
+        <h2>System Announcements</h2>
+        <div class="announcement">
+            <h3>QCTO Accreditation Notice</h3>
+            <p>Welcome to the CumLaude Institute e-learning environment. As a QCTO-accredited provider, all course materials for your learnerships and internships are now available.</p>
+        </div>
+        <div class="announcement">
+            <h3>Staff Internal Support</h3>
+            <p>Please ensure all student grades are uploaded by the 25th of every month. For technical issues with Blackboard, contact IT Support directly.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

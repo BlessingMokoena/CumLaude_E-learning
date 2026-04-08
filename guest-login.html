@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CumLaude Institute | Guest Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-left">
+        <img src="icon.png" alt="CumLaude Institute Logo" class="logo" onerror="this.src='https://via.placeholder.com/180x60?text=CumLaude+Institute'">
+        
+        <h1>Welcome to the Guest Portal</h1>
+        
+        <div class="login-form">
+            <form id="guestLoginForm" action="#" method="POST">
+                <label for="username">Guest Email</label>
+                <input type="email" id="username" name="username" placeholder="e.g. guest@example.com" required>
+                
+                <label for="password">Access Code / Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                
+                <button type="submit">Access Portal</button>
+            </form>
+            
+            <div id="loginRedirectProviders" class="provider-dropdown-container">
+                <button id="redirectProvidersDropdownButton" type="button" class="dropdown-btn">Switch Account Type ▼</button>
+                <ul id="loginRedirectProviderList" class="provider-list hidden">
+                    <li><a href="index.html">Login as Student</a></li>
+                    <li><a href="staff-login.html">Login as Staff</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="login-links">
+            <a href="https://www.cumlaudeinstitute.co.za/contact.html">Request Guest Access</a>
+        </div>
+    </div>
+
+    <div class="login-right">
+        <h2>General Information</h2>
+        <div class="announcement">
+            <h3>Public Access</h3>
+            <p>Welcome to our public guest portal. Here, moderators and visitors can view approved institute modules and institutional frameworks.</p>
+        </div>
+        <div class="announcement">
+            <h3>Need Help?</h3>
+            <p>If you are a guest moderator and have lost your access code, please contact our administrative team at <b>info@cumlaudeinstitute.co.za</b>.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

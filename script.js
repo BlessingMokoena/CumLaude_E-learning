@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Close the dropdown when an option is selected
+providerList.addEventListener('click', () => {
+    providerList.classList.add('hidden');
+});
     // Close provider list when clicking elsewhere on the page
     document.body.addEventListener('click', function(event) {
         if (providerList && !providerList.classList.contains('hidden')) {
