@@ -139,7 +139,6 @@ document.getElementById('sendResetBtn')?.addEventListener('click', async () => {
     } catch (error) {
         alert(error.message);
     }
-});
 
 const resetForm = document.getElementById('resetPasswordForm');
 const statusMsg = document.getElementById('statusMessage');
