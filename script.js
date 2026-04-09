@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             logoClicks++;
             if (logoClicks === 5) {
                 const secret = prompt("Enter Admin Access Key:");
-                if (secret === "CL-2026") window.location.href = "admin-login.html";
+                if (secret === "CL-2026") window.location.href = "admin-dashboard.html";
             }
             setTimeout(() => { logoClicks = 0; }, 3000);
         });
