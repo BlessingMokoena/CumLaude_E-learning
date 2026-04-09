@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>God-Mode Panel | CumLaude Institute</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="script.js" defer></script>
+    <style>
+        body { display: block; padding: 20px; overflow-y: auto; height: auto; background: #f1f5f9; }
+        .dashboard-header { 
+            background: #1b3768; color: white; padding: 20px; 
+            border-radius: 12px 12px 0 0; display: flex; 
+            justify-content: space-between; align-items: center; 
+        }
+        .main-panel { background: white; padding: 30px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .action-bar { margin-bottom: 30px; display: flex; gap: 10px; }
+        
+        /* Table Styles */
+        .user-table-container { overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #f8fafc; text-align: left; padding: 12px; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; }
+
+        /* Status & Badges */
+        .badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 11px; text-transform: uppercase; }
+        .role-god { background: #fee2e2; color: #991b1b; }
+        .role-mentor { background: #dcfce7; color: #166534; }
+        .role-learner { background: #e0e7ff; color: #3730a3; }
+        
+        /* Modal Style for "Create User" */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 100; }
+        .modal-content { background: white; padding: 30px; border-radius: 10px; width: 400px; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <div style="max-width: 1200px; margin: auto;">
+        <header class="dashboard-header">
+            <div>
+                <h1 style="margin:0; font-size: 24px;">God-Mode Control Panel</h1>
+                <p style="margin:0; font-size: 14px; color: #d4af37;">Full System Access: Enabled</p>
+            </div>
+            <a href="homepage.html" style="color: white; text-decoration: none; font-weight: bold;">Logout</a>
+        </header>
+
+        <main class="main-panel">
+            <div class="action-bar">
+                <button class="ticket-button" style="width: auto; margin: 0;" id="openCreateModal">+ Create New User</button>
+                <button class="btn-small" style="padding: 10px;">Audit Logs</button>
+            </div>
+
+            <section>
+                <h3>User Hierarchy & Activity</h3>
+                <div class="user-table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name / Email</th>
+                                <th>Role</th>
+                                <th>Recent Action</th>
+                                <th>Management</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                            <tr>
+                                <td><strong>Admin User</strong><br><small>god@cumlaude.com</small></td>
+                                <td><span class="badge role-god">God</span></td>
+                                <td>Changed "Learner" to "Blocked"</td>
+                                <td><button disabled>Protected</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="createUserModal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Add New System User</h3>
+            <form id="newUserForm">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe" style="width:100%; margin-bottom:10px;" required>
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com" style="width:100%; margin-bottom:10px;" required>
+                <label>Initial Role</label>
+                <select style="width:100%; margin-bottom:20px;">
+                    <option value="learner">Learner</option>
+                    <option value="mentor">Mentor</option>
+                    <option value="god">God</option>
+                </select>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="ticket-button" style="margin:0;">Create User</button>
+                    <button type="button" id="closeModal" style="background:#ccc; border:none; padding:10px; border-radius:5px; cursor:pointer;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // UI Logic for opening/closing the modal
+        const modal = document.getElementById('createUserModal');
+        document.getElementById('openCreateModal').onclick = () => modal.classList.remove('hidden');
+        document.getElementById('closeModal').onclick = () => modal.classList.add('hidden');
+    </script>
+</body>
+</html>

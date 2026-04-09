@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (userDoc.exists()) {
                 const role = userDoc.data().role;
-                if (role === 'admin') window.location.href = "admin-login.html";
+                if (role === 'admin') window.location.href = "admin-dashboard.html";
                 else if (role === 'staff') window.location.href = "staff-dashboard.html";
                 else window.location.href = "student-dashboard.html";
             } else {
