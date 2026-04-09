@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             logoClicks++;
             if (logoClicks === 5) {
                 const secret = prompt("Enter Admin Access Key:");
-                if (secret === "CL-2026") window.location.href = "admin-dashboard.html";
+                if (secret === "CL-2026") window.location.href = "admin-login.html";
             }
             setTimeout(() => { logoClicks = 0; }, 3000);
         });
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (userDoc.exists()) {
                 const role = userDoc.data().role;
-                if (role === 'admin') window.location.href = "admin-dashboard.html";
+                if (role === 'admin') window.location.href = "admin-login.html";
                 else if (role === 'staff') window.location.href = "staff-dashboard.html";
                 else window.location.href = "student-dashboard.html";
             } else {
